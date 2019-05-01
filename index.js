@@ -40,11 +40,12 @@ function displayResults(responseJson) {
 // now we need to get our results
   
 // let's format our search
-  function getParks(query, maxResults=50) {
+  function getParks(query, limit) {
     const params = {
       api_key: apiKey,
       stateCode: query,
-      maxResults,
+      limit,
+      start: 0
     };
     const queryString = formatQueryParams(params)
     const url = searchURL + '?' + queryString;
@@ -68,8 +69,8 @@ function displayResults(responseJson) {
     $('form').submit(event => {
       event.preventDefault();
       const searchTerm = $('#js-search-term').val();
-      const maxResults = $('#js-max-results').val();
-      getParks(searchTerm, maxResults);
+      const limit = $('#js-max-results').val();
+      getParks(searchTerm, limit);
     });
   }
 // can't forget to actually start the watchForm function.
